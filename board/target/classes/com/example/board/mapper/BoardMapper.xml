@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.board.mapper.BoardMapper">
+	<insert id="create">
+		insert into board (title, content, writer)
+		values(#{title},#{text}, #{writer})
+	</insert>
+
+	<select id="read" resultType="com.example.board.domain.Board">
+		select
+		board_no as boardNo, title, content, writer, reg_date as regDate
+		from
+		board
+		where board_no = #{boardNo}
+	</select>
+
+	<update id="update">
+		update board set title =#{title}, content =#{content}
+		where board_no = #{boardNo}
+	</update>
+
+	<delete id="delete">
+		delete from board where board_no = #{boardNo}
+	</delete>
+
+	<select id="list" resultType="com.example.board.domain.Board">
+ <![CDATA[
+ select 
+   board_no as boardNo, title, content as text, writer, reg_date as regDate
+ from 
+   board 
+ where board_no > 0 
+ order by board_no asc, reg_date asc
+ ]]>
+	</select>
+
+</mapper>
